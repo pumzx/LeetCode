@@ -4,10 +4,15 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] agrs) {
-        int[] s = twoSum(new int[]{2, 7, 11, 15}, 9);
+        //第1题
+        /*int[] s = twoSum(new int[]{2, 7, 11, 15}, 9);
         if (s.length > 0)
-            System.out.println(s[0] + "," + s[1]);
+            System.out.println(s[0] + "," + s[1]);*/
+
+        //第3题
         //System.out.println( lengthOfLongestSubstring("abcabcbb"));
+
+        //第8题
         //System.out.println(myAtoi("    10522545459"));
     }
 
