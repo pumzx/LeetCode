@@ -1,6 +1,8 @@
 import java.util.HashMap;
 import java.util.Map;
-  class ListNode {
+import java.util.Scanner;
+
+class ListNode {
       int val;
       ListNode next;
       ListNode(int x) { val = x; }
@@ -27,6 +29,21 @@ public class Main {
 
         //第8题
         //System.out.println(myAtoi("    10522545459"));
+
+
+        //携程笔试题：求数组的最大差值，（并给出两个最大差值的元素的位置）
+        /*Scanner scanner = new Scanner(System.in);
+        String str=scanner.nextLine();
+
+        String[] w=str.split(",");
+        int n=w.length;
+        int[] a= new int[n];
+        for(int i=0;i<n;i++){
+            a[i]=Integer.parseInt(w[i]);
+        }
+        System.out.println(getResultByOnpow(a,n));
+        System.out.println("*******");
+        System.out.println(getResultByOn(a,n));*/
     }
 
     /**
@@ -214,5 +231,47 @@ public class Main {
             return result;
         }
         return 0;
+    }
+
+
+    //求数组中相差最大的值，并给出哪两个元素相差最大，
+    // 例如：{5,3,2,8,1,3,9,5}，相差最大的值是8，他们的分别是1，9，对应的索引是4，6.
+    //复杂度为O(N)
+    public static int getResultByOn(int[] a,int n){
+        int s=0;
+        int max=0;
+        int minIndex=0;
+        int maxIndex=0;
+        for(int i=0;i<n-1;i++){
+            int temp=s;
+            s=s<0?(a[i+1]-a[i]):(a[i+1]-a[i]+s);
+            if(s<0){
+                minIndex=i+1;
+            }
+            if(s>max){
+                maxIndex=i+1;
+                max=s;
+            }
+        }
+        System.out.println("minIndex:"+minIndex+" ,  maxIndex:"+maxIndex);
+        if(max<0)
+            return 0;
+        return max;
+    }
+    //求数组中相差最大的值
+    //复杂度为O(N^2)
+    public static int getResultByOnpow(int[] a,int n){
+        int max=0;
+        for(int i=0;i<n;i++){
+            for(int j=i;j<n;j++){
+                if(a[j]>a[i]){
+                    int temp=a[j]-a[i];
+                    if(temp>max){
+                        max=temp;
+                    }
+                }
+            }
+        }
+        return max;
     }
 }
