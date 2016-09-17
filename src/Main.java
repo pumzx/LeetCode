@@ -1,6 +1,10 @@
 import java.util.HashMap;
 import java.util.Map;
-
+  class ListNode {
+      int val;
+      ListNode next;
+      ListNode(int x) { val = x; }
+  }
 public class Main {
 
     public static void main(String[] agrs) {
@@ -9,6 +13,15 @@ public class Main {
         if (s.length > 0)
             System.out.println(s[0] + "," + s[1]);*/
 
+        //第2题
+        ListNode l1=new ListNode(5);
+        l1.next=null;
+        ListNode l2=new ListNode(5);
+        ListNode s=addTwoNumbers(l1,l2);
+        while(s!=null){
+            System.out.println(s.val);
+            s=s.next;
+        }
         //第3题
         //System.out.println( lengthOfLongestSubstring("abcabcbb"));
 
@@ -42,6 +55,37 @@ public class Main {
         return result;
     }
 
+
+    /**
+     * NO2
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head = new ListNode(0);
+        ListNode result=head;
+        int b=0;
+        for(;l1!=null || l2!=null;l1=l1.next,l2=l2.next){
+            if(l1==null && l2!=null){
+                l1=new ListNode(0);
+            }
+            if(l2==null && l1!=null){
+                l2=new ListNode(0);
+            }
+
+            int val=(l1.val+l2.val+b)%10;
+            result.next=new ListNode(val);
+            result=result.next;
+            b=(l1.val+l2.val+b)/10;
+            if(l1.next==null&&l2.next==null&&b>0){
+                ListNode l = new ListNode(b);
+                result.next=l;
+                return head.next;
+            }
+        }
+        return head.next;
+    }
 
     /**
      * @param c
