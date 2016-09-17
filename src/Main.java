@@ -16,14 +16,15 @@ public class Main {
             System.out.println(s[0] + "," + s[1]);*/
 
         //第2题
-        ListNode l1=new ListNode(5);
+        /*ListNode l1=new ListNode(5);
         l1.next=null;
         ListNode l2=new ListNode(5);
         ListNode s=addTwoNumbers(l1,l2);
         while(s!=null){
             System.out.println(s.val);
             s=s.next;
-        }
+        }*/
+
         //第3题
         //System.out.println( lengthOfLongestSubstring("abcabcbb"));
 
