@@ -45,6 +45,13 @@ public class Main {
         System.out.println(getResultByOnpow(a,n));
         System.out.println("*******");
         System.out.println(getResultByOn(a,n));*/
+
+        //快速排序+二分查找的递归和非递归
+        int[] a={3,5,1,7,3,5,9,3,2};
+        quickSort(a,0,a.length-1);
+        print(a);
+        System.out.println(BinarySearchRecursion(a,2,0,a.length-1));//二分查找
+        System.out.println(BinarySearchRecursion2(a,2));//二分查找非递归
     }
 
     /**
@@ -235,9 +242,16 @@ public class Main {
     }
 
 
-    //求数组中相差最大的值，并给出哪两个元素相差最大，
-    // 例如：{5,3,2,8,1,3,9,5}，相差最大的值是8，他们的分别是1，9，对应的索引是4，6.
-    //复杂度为O(N)
+
+
+    /**
+     * 求数组中相差最大的值，并给出哪两个元素相差最大，
+     * 例如：{5,3,2,8,1,3,9,5}，相差最大的值是8，他们的分别是1，9，对应的索引是4，6.
+     * 复杂度为O(N)
+     * @param a
+     * @param n
+     * @return
+     */
     public static int getResultByOn(int[] a,int n){
         int s=0;
         int max=0;
@@ -259,8 +273,16 @@ public class Main {
             return 0;
         return max;
     }
-    //求数组中相差最大的值
-    //复杂度为O(N^2)
+
+
+    /**
+    * 求数组中相差最大的值，并给出哪两个元素相差最大，
+            * 例如：{5,3,2,8,1,3,9,5}，相差最大的值是8，他们的分别是1，9，对应的索引是4，6.
+            * 复杂度为O(N^2)
+    * @param a 数组
+    * @param n 数组长度
+    * @return
+     */
     public static int getResultByOnpow(int[] a,int n){
         int max=0;
         for(int i=0;i<n;i++){
@@ -274,5 +296,83 @@ public class Main {
             }
         }
         return max;
+    }
+
+    public static void quickSort(int[] a, int left, int right){
+        int index=-1;
+        if(left<=right) {
+            index = partition(a, left, right);
+            if(index<right) {
+                quickSort(a, index + 1, right);
+            }
+            if(index>left){
+                quickSort(a, left, index - 1);
+            }
+        }
+    }
+
+    public static int partition(int[] a , int left , int right){
+        int first=a[left];
+        int beginIndex=left;
+        while(left<right) {
+            while (left < right && a[right] >= first) {
+                right--;
+            }
+            while (left < right && a[left] <= first) {
+                left++;
+            }
+            swap(a,left,right);
+            if(left>=right){
+                break;
+            }
+        }
+            int temp = a[left];
+            a[left] = first;
+            a[beginIndex] = temp;
+            return left;
+    }
+
+    public static void swap(int[] a,int i,int j){
+        int temp=a[i];
+        a[i]=a[j];
+        a[j]=temp;
+    }
+
+    public static void print(int[] a){
+        for(int var :a ){
+            System.out.print(var+" ");
+        }
+        System.out.println();
+    }
+
+    //递归实现二分查找
+    public static int BinarySearchRecursion(int[] a,int target,int left,int right){
+        int len=left+(right-left)/2;
+        if(a[len]==target)
+            return len;
+        else if (target>a[len]){
+           return BinarySearchRecursion(a,target,len+1,right);
+        }
+        else {
+            return BinarySearchRecursion(a,target,left,len-1);
+        }
+    }
+
+    //非递归二分查找
+    public static int BinarySearchRecursion2(int[] a,int target){
+        int bottom=0,top=a.length-1;
+        while(bottom<=top){
+            int middle=bottom+(top-bottom)/2;
+            if(a[middle]==target) {
+                return middle;
+            }
+            else if(target>a[middle]){
+                bottom=middle+1;
+            }
+            else{
+                top=middle-1;
+            }
+        }
+        return -1;
     }
 }
